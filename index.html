@@ -17,6 +17,8 @@
   <title>JS Todo List</title>
 </head>
 <body>
+  <!-- Navbar -->
+
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">JS Todo List</a>
     <button
@@ -39,7 +41,7 @@
           </a>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0" id="filters">
+      <!-- <form class="form-inline my-2 my-lg-0" id="filters">
         <label class="font-weight-bold text-info mr-3">Filters</label>
         <input type="radio" name="type" value="all" class="mx-1">
         <label for="male" class="mb-0">All</label>
@@ -58,12 +60,13 @@
         <button class="btn btn-outline-info my-2 my-sm-0" type="submit" id="search">
           Search
         </button>
-      </form>
+      </form> -->
     </div>
   </nav>
 
   <!-- Modal -->
-  <div
+  
+  <!-- <div
     class="modal fade"
     id="modal"
     tabindex="-1"
@@ -127,13 +130,15 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <main>
     <div class="container pt-3">
       <div class="alert alert-danger d-none" role="alert" id="alert">
         A simple danger alert—check it out!
       </div>
+
+      <!-- Add Todo -->
 
       <div>
         <form> 
@@ -165,6 +170,8 @@
         </form>
       </div>
 
+      <!-- Table -->
+
       <div class="mt-5">
         <table class="table table-striped" id="table">
           <thead>
@@ -180,7 +187,25 @@
             </tr>
           </thead>
           <tbody>
-            <!-- Content generated with JS -->
+            <tr>
+              <td>
+                Learn JS
+              </td>
+              <td>
+                Watch Javascript tutorials on Youtube
+              </td>
+              <td class="text-center">
+                <input type="checkbox">
+              </td>
+              <td class="text-right">
+                <button class="btn btn-primary mb-1">
+                  <i class="fa fa-pencil"></i>
+                </button>
+                <button class="btn btn-danger mb-1 ml-1">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -196,6 +221,5 @@
   <!-- Bootstrap -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
   <!-- JS Code -->
-  <script src="js/index.js" type="module"></script>
 </body>
 </html>
