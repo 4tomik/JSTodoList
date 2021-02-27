@@ -6,15 +6,15 @@ export default class Modal {
     this.description = document.getElementById("modal-description");
     this.btn = document.getElementById("modal-btn");
     this.completed = document.getElementById("modal-completed");
-    this.alert = new Alert('modal-alert');
+    this.alert = new Alert("modal-alert");
     this.todo = null;
   }
 
   setValues(todo) {
     this.todo = todo;
-    this.title.value = todo.title,
-    this.description.value = todo.description,
-    this.completed.checked = todo.completed
+    this.title.value = todo.title;
+    this.description.value = todo.description;
+    this.completed.checked = todo.completed;
   }
 
   onClick(callback) {
