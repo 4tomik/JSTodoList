@@ -1,29 +1,16 @@
+import AddTodo from "./components/add-todo.js";
+import Modal from "./components/modal.js";
+
 export default class View {
   constructor() {
     this.model = null;
-    this.titleInput = document.getElementById("title");
-    this.descriptionInput = document.getElementById("description");
-    this.addBtn = document.getElementById("add");
     this.table = document.getElementById("table");
-    this.alert = document.querySelector(".alert");
 
-    this.modalTitle = document.getElementById("modal-title");
-    this.modalDescription = document.getElementById("modal-description");
-    this.modalBtn = document.getElementById("modal-btn");
-    this.modalCompleted = document.getElementById("modal-completed");
+    this.modal = new Modal();
+    this.addTodoForm = new AddTodo();
 
-    this.addListeners();
-  }
-
-  addListeners() {
-    this.addBtn.onclick = () => this.addTodo();
-    this.modalBtn.onclick = () =>
-      this.editTodo(
-        parseInt(this.modalBtn.getAttribute("todo-id")),
-        this.modalTitle.value,
-        this.modalDescription.value,
-        this.modalCompleted.checked
-      );
+    this.addTodoForm.onClick((title, description) => this.addTodo(title, description));
+    this.modal.onClick((id, values) => this.editTodo(id, values));
   }
 
   setModel(model) {
@@ -35,19 +22,13 @@ export default class View {
     todos.forEach((todo) => this.createRow(todo));
   }
 
-  toggleModal(todo) {
-    this.modalTitle.value = todo.title;
-    this.modalDescription.value = todo.description;
-    this.modalBtn.setAttribute("todo-id", todo.id);
-  }
-
-  editTodo(id, title, description, completed) {
-    this.model.editTodo(id, title, description, completed);
+  editTodo(id, values) {
+    this.model.editTodo(id, values);
+    const { title, description, completed } = values;
     const row = document.getElementById(id);
     row.children[0].innerText = title;
     row.children[1].innerText = description;
     row.children[2].children[0].checked = completed;
-    $("#modal").modal("toggle");
   }
 
   toggleCompleted(id) {
@@ -59,18 +40,9 @@ export default class View {
     document.getElementById(id).remove();
   }
 
-  addTodo() {
-    if (!this.titleInput.value || !this.descriptionInput.value) {
-      this.alert.classList.remove("d-none");
-      this.alert.innerText = "Title and description are required!";
-    } else {
-      const todo = this.model.addTodo(
-        this.titleInput.value,
-        this.descriptionInput.value
-      );
-      this.createRow(todo);
-      this.alert.classList.add("d-none");
-    }
+  addTodo(title, description) {
+    const todo = this.model.addTodo(title, description);
+    this.createRow(todo);
   }
 
   createRow(todo) {
@@ -99,7 +71,7 @@ export default class View {
     editBtn.innerHTML = '<i class="fa fa-pencil"></i>';
     editBtn.setAttribute("data-toggle", "modal");
     editBtn.setAttribute("data-target", "#modal");
-    editBtn.onclick = () => this.toggleModal(todo);
+    editBtn.onclick = () => this.modal.setValues(todo);
     row.children[3].appendChild(editBtn);
 
     const removeBtn = document.createElement("button");

@@ -37,9 +37,9 @@ export default class Model {
     this.save();
   }
 
-  editTodo(id, title, description, completed) {
+  editTodo(id, values) {
     const index = this.todos.findIndex((todo) => todo.id === id);
-    Object.assign(this.todos[index], { title, description, completed });
+    Object.assign(this.todos[index], values);
     this.save();
   }
 
