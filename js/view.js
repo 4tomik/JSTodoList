@@ -1,4 +1,5 @@
 import AddTodo from "./components/add-todo.js";
+import Filters from "./components/filters.js";
 import Modal from "./components/modal.js";
 
 export default class View {
@@ -8,9 +9,11 @@ export default class View {
 
     this.modal = new Modal();
     this.addTodoForm = new AddTodo();
+    this.filtersForm = new Filters();
 
-    this.addTodoForm.onClick((title, description) => this.addTodo(title, description));
     this.modal.onClick((id, values) => this.editTodo(id, values));
+    this.addTodoForm.onClick((title, description) => this.addTodo(title, description));
+    this.filtersForm.onClick(filters => this.filter(filters));
   }
 
   setModel(model) {
@@ -43,6 +46,32 @@ export default class View {
   addTodo(title, description) {
     const todo = this.model.addTodo(title, description);
     this.createRow(todo);
+  }
+
+  filter(filters) {
+    const { type, words } = filters;
+    const [, ...rows] = this.table.getElementsByTagName('tr');
+    for (const row of rows) {
+      const [title, description, completed] = row.children;
+      let shouldHide = false;
+
+      if (words) {
+        shouldHide = !title.innerText.includes(words) && !description.innerText.includes(words);
+      }
+
+      const shouldBeCompleted = type === 'completed';
+      const isCompleted = completed.getElementsByTagName('input')[0].checked;
+
+      if (type !== 'all' && shouldBeCompleted != isCompleted) {
+        shouldHide = true;
+      }
+
+      if (shouldHide) {
+        row.classList.add('d-none');
+      } else {
+        row.classList.remove('d-none');
+      }
+    }
   }
 
   createRow(todo) {

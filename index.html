@@ -39,14 +39,23 @@
           </a>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
+      <form class="form-inline my-2 my-lg-0" id="filters">
+        <label class="font-weight-bold text-info mr-3">Filters</label>
+        <input type="radio" name="type" value="all" class="mx-1">
+        <label for="male" class="mb-0">All</label>
+        <input type="radio" name="type" value="completed" class="mx-1">
+        <label for="female" class="mb-0">Completed</label>
+        <input type="radio" name="type" value="uncompleted" class="mx-1">
+        <label for="other" class="mr-2 mb-0">Uncompleted</label> 
+
         <input
           class="form-control mr-sm-2"
           type="search"
-          placeholder="Search"
+          name="words"
+          placeholder="Words"
           aria-label="Search"
         >
-        <button class="btn btn-outline-info my-2 my-sm-0" type="submit">
+        <button class="btn btn-outline-info my-2 my-sm-0" type="submit" id="search">
           Search
         </button>
       </form>
