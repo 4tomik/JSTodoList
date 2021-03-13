@@ -11,7 +11,7 @@ export default class Filters {
       callback({
         type: data.get('type'),
         words: data.get('words'),
-      })
+      });
     }
   }
 }
