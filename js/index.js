@@ -9,3 +9,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
   view.render();
 });
+
+// Test
